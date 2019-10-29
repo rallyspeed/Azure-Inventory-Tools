@@ -11,3 +11,4 @@ Azure CLI 2.0, python3
 - `python3 inventory.py`
 
 ## Notes
+ - You can Select one subscription or all of them.
