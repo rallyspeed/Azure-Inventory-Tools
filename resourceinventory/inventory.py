@@ -197,8 +197,7 @@ def Multiple_sub(subs):
 
             if aks_number!=0:
                 try:
-                    aksnodes_cmd=az_cli('az aks list --query [][agentPoolProfiles][][][count] --output tsv')
-                    aksnodes = "%s | paste -sd+ | bc" % aksnodes_cmd
+                    aksnodes=os.popen('az aks list --query [][agentPoolProfiles][][][count] --output tsv | paste -sd+ | bc')
                     aksnodes_number=int(aksnodes.read())
                 except:
                     aksnodes_number=0
@@ -211,12 +210,6 @@ def Multiple_sub(subs):
             f.write('%s,%i,%i,%i,%i,%i,%i,%i,%i,%i,%i,%i\n' % (subs[2][j],vnet_number,vm_number,vm_win_number,vm_lin_number,nsg_number,azfw_number,alg_number,lb_number,sql_number,aks_number,aksnodes_number))
             f.close()
             print(Fore.GREEN + ("Collection completed for subscription %s" % subs[2][j]))
-            #print('Number of VNET: %i' % vnet_number)
-            #print('Number of VM: %i' % vm_number)
-            
-    #print('Total Number of VNET: %i' % totalvnetnumber)
-    #print('Total Number of VM: %i' % totalvmnumber)
-    
 
     timestr = time.strftime("%Y%m%d-%H%M%S")
     reportname=("Inventory"+timestr+".csv")
