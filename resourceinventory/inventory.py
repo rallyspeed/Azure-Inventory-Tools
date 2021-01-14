@@ -87,29 +87,29 @@ def Single_sub():
     aksnodes_number=0
     azfw_number=0
     vnet_number = az_cli('az network vnet list --query [][id] --output tsv')
+    print('Total Number of VNET: %i' % vnet_number)
     vm_number=az_cli('az vm list --query [][id] --output tsv')
+    print('Number of VM: %i' % vm_number)
     vm_win_number=az_cli('az vm list --query [][][storageProfile.osDisk.osType] --output tsv ')
     vm_lin_number=az_cli('az vm list --query [][][storageProfile.osDisk.osType] --output tsv ')
     nsg_number=az_cli('az network nsg  list --query [][id] --output tsv')
+    print('Number of NSG: %i' % nsg_number)
     alg_number=az_cli('az network application-gateway list --query [][id] --output tsv')
+    print('Number of ALG: %i' % alg_number)
     lb_number=az_cli('az network lb list --query [][id] --output tsv')
+    print('Number of LB: %i' % lb_number)
     sql_number=az_cli('az sql server list --query [][id] --output tsv')
+    print('Number of SQL Servers: %i' % sql_number)
     aks_number=az_cli('az aks list --query [][id] --output tsv')
-    #if aks_number!=0:
-    #    aksnodes=os.popen('az aks list --query [][agentPoolProfiles][][][count] --output tsv | paste -sd+ | bc')
-    #    aksnodes_number=int(aksnodes.read())
-    #else:
-    #    aksnodes_number=0
+    print('Number of AKS Cluster: %i' % aks_number)
+    if aks_number!=0:
+        aksnodes=os.popen('az aks list --query [][agentPoolProfiles][][][count] --output tsv | paste -sd+ | bc')
+        aksnodes_number=int(aksnodes.read())
+    else:
+        aksnodes_number=0
+    print('Number of AKS Nodes: %i' % aksnodes_number)
     #Required azure-firewall extension
     azfw_number=az_cli('az network firewall list --query [][id] --output tsv')
-    print('Total Number of VNET: %i' % vnet_number)
-    print('Number of VM: %i' % vm_number)
-    print('Number of NSG: %i' % nsg_number)
-    print('Number of ALG: %i' % alg_number)
-    print('Number of LB: %i' % lb_number)
-    print('Number of SQL Servers: %i' % sql_number)
-    print('Number of AKS Cluster: %i' % aks_number)
-    print('Number of AKS Nodes: %i' % aksnodes_number)
     print('Number of Azure Firewalls Nodes: %i' % azfw_number)
 
 ############################################
