@@ -23,6 +23,7 @@ def az_cli (args_str):
     args = args_str.split()
     proc = subprocess.Popen(args,stdout=subprocess.PIPE)
     out = proc.stdout.readlines()
+    print(out)
     count = len(out)
     return count
 
