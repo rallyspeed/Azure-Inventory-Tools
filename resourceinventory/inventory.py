@@ -23,7 +23,6 @@ def az_cli (args_str):
     args = args_str.split()
     proc = subprocess.Popen(args,stdout=subprocess.PIPE)
     out = proc.stdout.readlines()
-    print(out)
     count = len(out)
     return count
 
@@ -75,6 +74,18 @@ def Menu(subs):
 ############################################
 # Single Sub
 def Single_sub():
+     
+    vm_number = 0
+    vm_lin_number = 0
+    vm_win_number = 0
+    vnet_number = 0
+    nsg_number = 0
+    alg_number = 0
+    lb_number = 0
+    sql_number = 0
+    aks_number=0
+    aksnodes_number=0
+    azfw_number=0
     vnet_number = az_cli('az network vnet list --query [][id] --output tsv')
     vm_number=az_cli('az vm list --query [][id] --output tsv')
     vm_win_number=az_cli('az vm list --query [][][storageProfile.osDisk.osType] --output tsv ')
@@ -84,11 +95,11 @@ def Single_sub():
     lb_number=az_cli('az network lb list --query [][id] --output tsv')
     sql_number=az_cli('az sql server list --query [][id] --output tsv')
     aks_number=az_cli('az aks list --query [][id] --output tsv')
-    if aks_number!=0:
-        aksnodes=os.popen('az aks list --query [][agentPoolProfiles][][][count] --output tsv | paste -sd+ | bc')
-        aksnodes_number=int(aksnodes.read())
-    else:
-        aksnodes_number=0
+    #if aks_number!=0:
+    #    aksnodes=os.popen('az aks list --query [][agentPoolProfiles][][][count] --output tsv | paste -sd+ | bc')
+    #    aksnodes_number=int(aksnodes.read())
+    #else:
+    #    aksnodes_number=0
     #Required azure-firewall extension
     azfw_number=az_cli('az network firewall list --query [][id] --output tsv')
     print('Total Number of VNET: %i' % vnet_number)
