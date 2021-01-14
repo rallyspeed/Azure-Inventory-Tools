@@ -3,6 +3,7 @@ Generate a csv file list for each subscription the number of VNET, VM, Windows V
 
 ## Prerequisites
 Azure CLI 2.0, python3
+Azure Firewall Extension (az extension add --name azure-firewall)
 
 ## Installation
 - `git clone https://github.com/rallyspeed/Azure-Inventory-Tools.git`
